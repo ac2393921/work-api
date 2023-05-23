@@ -1,0 +1,14 @@
+version: '3'
+services:
+  python:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      target: develop
+    volumes:
+      - ./:/src
+    working_dir: "/src"
+    tty: true
+    ports: 
+      - "8080:8080"
+    restart: always
