@@ -1,7 +1,7 @@
 from app.domain.repositories.i_work_repository import IWorkRepository
 
 
-class GetWorkUsecase:
+class FetchWorksUsecase:
     def __init__(self, repository: IWorkRepository) -> None:
         self._repository = repository
 

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from app.domain.entities.work import Work
 from app.domain.repositories.i_work_repository import IWorkRepository
@@ -29,6 +29,13 @@ WORKS = [
 
 
 class InMemoryWorkRepository(IWorkRepository):
+    def find(self, work_id: str) -> Optional[Work]:
+        work = None
+        for work_data in WORKS:
+            if work_data["id"] == work_id:
+                work = Work(**work_data)
+        return work
+
     def fetch_works(self) -> List[Work]:
         works = list()
         for work in WORKS:
