@@ -4,8 +4,8 @@ from typing import List, Optinal
 
 from pydantic import BaseModel
 
-from app.domain.values.position_id import PositionId
-from app.domain.values.screeming_id import ScreemingId
+from app.domain.value_objects.position_id import PositionId
+from app.domain.value_objects.screeming_id import ScreemingId
 
 
 class ScreeningStatus(Enum):

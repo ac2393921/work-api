@@ -12,3 +12,7 @@ class IWorkRepository(ABC):
     @abstractmethod
     def fetch_works(self) -> List[Work]:
         return NotImplementedError()
+
+    @abstractmethod
+    def add(self, work: Work) -> None:
+        return NotImplementedError()
