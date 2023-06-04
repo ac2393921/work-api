@@ -1,8 +1,14 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
-from app.domain.entities.work import Work
+from app.usecases.work.work_dto import WorkDTO
 
 
 class FetchWorkOutputPort(BaseModel):
-    id: str
-    title: str
+    work: WorkDTO
+
+    class Config:
+        json_encoders = {
+            datetime: lambda v: v.isoformat(),
+        }
