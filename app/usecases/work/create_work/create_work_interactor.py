@@ -24,5 +24,5 @@ class CreateWorkInteractor(CreateWorkUsecase):
             created_at=datetime.now(),
             updated_at=datetime.now(),
         )
-        self._repository.add(work)
+        self._repository.save(work)
         return CreateWorkOutputPort(work=WorkDTO(**work.dict()))

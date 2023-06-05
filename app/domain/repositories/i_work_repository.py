@@ -14,5 +14,9 @@ class IWorkRepository(ABC):
         return NotImplementedError()
 
     @abstractmethod
-    def add(self, work: Work) -> None:
+    def save(self, work: Work) -> None:
+        return NotImplementedError()
+
+    @abstractmethod
+    def update(self, work: Work, title: str, description: str) -> None:
         return NotImplementedError()

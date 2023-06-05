@@ -11,6 +11,9 @@ from app.usecases.work.fetch_work.fetch_work_interactor import FetchWorkInteract
 from app.usecases.work.fetch_work.fetch_work_output_port import FetchWorkOutputPort
 from app.usecases.work.fetch_works.fetch_works_interactor import FetchWorksInteractor
 from app.usecases.work.fetch_works.fetch_works_output_port import FetchWorksOutputPort
+from app.usecases.work.update_work.update_work_input_port import UpdateWorkInputPort
+from app.usecases.work.update_work.update_work_interactor import UpdateWorkInteractor
+from app.usecases.work.update_work.update_work_output_port import UpdateWorkOutputPort
 
 router = APIRouter(
     prefix="/works",
@@ -46,6 +49,21 @@ def create_work(
     work: CreateWorkInputPort,
 ) -> JSONResponse:
     usecase = CreateWorkInteractor(repository=InMemoryWorkRepository())
+    output = usecase.handle(work)
+    return JSONResponse(
+        status_code=status.HTTP_201_CREATED,
+        content=jsonable_encoder(output),
+        headers={"Location": f"/works/{output.work.id}"},
+    )
+
+
+@router.put(
+    "/", response_model=UpdateWorkOutputPort, status_code=status.HTTP_201_CREATED
+)
+def update_work(
+    work: UpdateWorkInputPort,
+) -> JSONResponse:
+    usecase = UpdateWorkInteractor(repository=InMemoryWorkRepository())
     output = usecase.handle(work)
     return JSONResponse(
         status_code=status.HTTP_201_CREATED,

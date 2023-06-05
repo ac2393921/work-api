@@ -57,5 +57,13 @@ class InMemoryWorkRepository(IWorkRepository):
 
         return works
 
-    def add(self, work: Work) -> None:
+    def save(self, work: Work) -> None:
         in_memory_works.append(work.dict())
+
+    def update(self, work: Optional[Work]) -> None:
+        if not work:
+            raise ValueError("Work not found")
+
+        for i, work_data in enumerate(in_memory_works):
+            if work_data["id"] == work.id.id:
+                in_memory_works[i] = work.dict()
